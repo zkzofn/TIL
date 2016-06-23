@@ -2,7 +2,7 @@
 
 ## React.js 의 기본형태
 ```javascript
-class RobotBox extends React.Componet {
+class RobotBox extends React.Component {
 	render() {
 		return <div>Hello From React</div>;
 	}
@@ -42,14 +42,14 @@ React.createElement(StoryBox, null)  //과 같이 변경된다
 * *attr는 dictionary 형태
 
 ## JSX -> HTML 로의 변환과정
-* JSX
+1. JSX
 ```javascript
 <div>
 	<h3>Stories App</h3>
 	<p> className="lead">Sample paragraph</p>
 <div>
 ```
-* javascript
+2. javascript
 ```javascript
 React.createElement("div", null,
 	React.createElement("h3", null, "Stories App"),
@@ -57,7 +57,7 @@ React.createElement("div", null,
 );
 ```
 
-* HTML
+3. HTML
 ```javascript
 <div> data-reactroot>
 	<div>
@@ -69,6 +69,7 @@ React.createElement("div", null,
 
 
 ## javascript 의 요소를 사용할 수 있다.
+* CSS의 class를 사용할 때, class라고 쓰지 않고 className을 사용한다.
 ```javascript
 class StoryBox extends React.Component {
 	render() {
@@ -85,7 +86,7 @@ class StoryBox extends React.Component {
 	}
 }
 ```
-* CSS의 class를 사용할 때, class라고 쓰지 않고 className을 사용한다.
+
 
 
 ## JSX 에서의 반복문
@@ -106,4 +107,83 @@ class StoryBox extends React.Component {
 	}
 }
 ```
+위의 <ul></ul> 태그 안의 내용은 아래와 같이 변형된다.
+```javascript
+<li>HTML</li>
+<li>Javascript</li>
+<li>React</li>
+```
 
+## Component
+### Component structure
+Components 가 화면을 구성할 때는 아래 그림과 같이 각각의 요소를 component 로 구성한다.
+![alt text](http://imgur.com/qsegLf7)
+
+* 하나의 Component 는 하나의 function 이나 object 를 이룬다.
+* 하나의 Component는 하나의 `.js`파일에 구현한다. *1
+* **React.js 의 장점** : 한 화면에 많은 Components 를 보여줘도 속도가 빠르다.
+
+1. ![alt text](http://imgur.com/2i71mDb)
+
+### Component 기초
+하나의 Component 를 사용하기 위해서는 아래에서 export 시켜줘야 한다.
+```javascript
+import React from 'react';
+
+const SearchBar = () => {
+	return <input />;
+}
+
+export default SearchBar;
+```
+
+위에서 만든 component를 다른 `.js`파일에서 import 하여 사용할 수 있다.
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import SearchBar from 'search_bar';
+```
+위에서 가리키는 from 'search_bar' 는 components/search_bar.js 의 search_bar 를 가리킨다.
+
+
+여러줄을 `return`하고 싶을 때에는 () 로 묶는다.
+```javascript
+return (
+	<div>
+		<SearchBar />
+	<div>
+);
+```
+
+### Functional component / Class component 의 차이
+* Functional component (const 로 선언)는 JSX를 내보내는 역할만 한다. (간단한 기능!)
+  * Props 를 이용해서 input, output 을 markup 하는 역할만 한다.
+* Class component (class 로 선언)는 state, variables, methods 등 다양한 기능을 할 수 있다.
+
+### Class component
+Class component 는 아래와 같이 `new`를 이용해서 사용할 수 있다.
+```javascript
+class SearchBar extends React.Component {
+	render() {
+		return <input />;
+	}
+}
+
+var searchBarObject = new searchBar;
+```
+
+`extends React.Component`의 두 가지 표현방식
+1.
+```javascript
+import React from 'react';
+
+class SearchBar extends React.Component {}
+
+```
+2.
+```javascript
+improt React, { Component } from 'react';
+
+class SearchBar extends Component {}
+```
