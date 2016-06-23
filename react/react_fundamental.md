@@ -117,13 +117,13 @@ class StoryBox extends React.Component {
 ## Component
 ### Component structure
 Components 가 화면을 구성할 때는 아래 그림과 같이 각각의 요소를 component 로 구성한다.
-![alt text](http://imgur.com/qsegLf7)
+[Imgur](http://i.imgur.com/qsegLf7.png)
 
 * 하나의 Component 는 하나의 function 이나 object 를 이룬다.
 * 하나의 Component는 하나의 `.js`파일에 구현한다. *1
 * **React.js 의 장점** : 한 화면에 많은 Components 를 보여줘도 속도가 빠르다.
 
-1. ![alt text](http://imgur.com/2i71mDb)
+1. [Imgur](http://i.imgur.com/2i71mDb.png)
 
 ### Component 기초
 하나의 Component 를 사용하기 위해서는 아래에서 export 시켜줘야 한다.
