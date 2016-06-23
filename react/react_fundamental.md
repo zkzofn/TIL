@@ -13,7 +13,7 @@ let target = document.getElementById('robot-app');
 ReactDom.render(<RobotBox />, target);
 ```
 
-모든 component는(코드에서 `class RobotBox`)
+모든 component 는(코드에서 `class RobotBox`부분)
 * `React.Component`를 `extends`해야 한다.
 * `render()` function을 포함해야 한다.
 
@@ -25,18 +25,18 @@ ReactDom.render(<RobotBox />, target);
 
 ## JSX 의 javascript 로의 변형
 ```javascript
-<div>Story Box</div>
-``` 를 javascript로 변경하면
+<div>Story Box</div>  //를 javascript로 변경하면
+```
 ```javascript
 React.createElement('div', null, 'Story Box')
 ```
 
 ```javascript
-<StoryBox />
-```를 javascript로 변경하면
+<StoryBox />  //를 javascript로 변경하면
+```
 ```javascript
-React.createElement(StoryBox, null)
-```과 같이 변경된다
+React.createElement(StoryBox, null)  //과 같이 변경된다
+```
 
 * `React.createElement('element', 'attr', 'content')`와 같이 나타낼 수 있다.
 * *attr는 dictionary 형태
