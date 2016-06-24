@@ -237,7 +237,7 @@ export default SearchBar;
 ```
 
 위 `event => ` 에서 `event`는 argument 인데 argument가 한 개인 경우는 괄호없이 사용 가능하다.
-Argument 가 2개 이상일 경우에는 (arg1, arg2, ...) 형태로 사용할 수 있다.
+Argument 가 2개 이상일 경우에는 `(arg1, arg2, ...)` 형태로 사용할 수 있다.
 
 
 
@@ -266,7 +266,7 @@ class SearchBar extents Component {
 export default SearchBar;
 ```
 
-[Imgur](http://i.imgur.com/H6RqP6W.png)
+![Imgur](http://i.imgur.com/H6RqP6W.png)
 
 
 `state` 의 변수명과 `param`의 이름이 같으면 `{ key : value }`형식으로 쓰지 않고 `param` 하나만 써줘도 `setState` 가 가능하다.
