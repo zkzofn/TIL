@@ -189,3 +189,112 @@ improt React, { Component } from 'react';
 
 class SearchBar extends Component {}
 ```
+
+### State 기초
+`class component` 는 `constructor`, `state` 를 가질 수 있다.
+여기서 `state`는 클래스의 멤버변수 역할을 하는 것으로 이해했다.
+
+`state` 값을 설정할 때 
+```javascript
+render() {
+	O - return <input onChange={event => this.setState({ term: event.target.value })} />;
+	X = this.state.term = event.target.value;
+}
+```
+
+
+### Event Handling
+이벤트 핸들링은 JSX 태그 안의 `on`을 통해서 이벤트 핸들링이 가능하다.
+
+ex) `<input>`에 대한 이벤트 핸들링은 다음과 같이 할 수 있다.
+```javascript
+import React, { Component } from 'react';
+
+class SearchBar extends Component {
+	render () {
+		return <input onChange={this.onInputChange} />;
+	}
+
+	onInputChange(event) {
+		console.log(event.target.value);
+	}
+}
+
+export default SearchBar;
+```
+
+위의 내용을 ES6 문법을 적용하여 `arrow function`을 적용하면 다음과 같이 표현할 수 있다.
+```javascript
+import React, { Component } from 'react';
+
+class SearchBar extends Component {
+	render() {
+		return <input onChange={event => console.log(event.target.value)} />;
+	}
+}
+
+export default SearchBar;
+```
+
+위 `event => ` 에서 `event`는 argument 인데 argument가 한 개인 경우는 괄호없이 사용 가능하다.
+Argument 가 2개 이상일 경우에는 (arg1, arg2, ...) 형태로 사용할 수 있다.
+
+
+
+
+### Event Handling + state 값 사용 예
+```javascript
+import React, { component } from 'react';
+
+class SearchBar extents Component {
+	constructor(props) {
+		super(props);
+		
+		this.state = { term: '' }
+	}
+
+	render() {
+		return (
+			<div>
+				<input onChange={event => this.setState({ term: event.target.value })} />
+				Value of the input: {this.state.term}
+			</div>
+		)
+	}
+}
+
+export default SearchBar;
+```
+
+[Imgur](http://i.imgur.com/H6RqP6W.png)
+
+
+`state` 의 변수명과 `param`의 이름이 같으면 `{ key : value }`형식으로 쓰지 않고 `param` 하나만 써줘도 `setState` 가 가능하다.
+`props`를 사용할 때 class component 에서는 `this.props`로 사용해야 하고
+functional component 에서는 argument 로 받기 때문에 `this`없이 `props`로 바로 사용할 수 있다.
+
+```javascript
+class App extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = { videos: [] };
+
+		YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+			this.setState({ videos });
+		});
+		// this.setState({ videos: videos }); 이렇게 key : value 형식으로 쓰지 않아도 가능
+	}
+}
+```
+
+### Youtube API 사용해서 동영상 재생
+첫 번째 `argument`는 youtube API의 configure option
+두 번째 `argument`는 callback function
+```javascript
+YTSearch({key: API_KEY, term: 'surfboards'}, function(data) {
+	console.log(data);
+});
+```
+
+
