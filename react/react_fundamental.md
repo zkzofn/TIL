@@ -1,5 +1,8 @@
 # React.js 기초
 
+## React.js 의 기본구조
+![Imgur](http://i.imgur.com/ougcJUI.png)
+
 ## React.js 의 기본형태
 ```javascript
 class RobotBox extends React.Component {
