@@ -300,4 +300,99 @@ YTSearch({key: API_KEY, term: 'surfboards'}, function(data) {
 });
 ```
 
+### {}를 이용한 props 사용
+```javascript
+//아래의 두 코드는 같은 내용이다.
+const VideoListItem = (props) => {
+	const video = props.video;
 
+	return <li>Video</li>;
+};
+
+
+const VideoListItem = ({video}) => {
+	return <li>Video</li>;
+}
+```
+
+### Handling Null Props
+아래의 `Component`하단에서 아래에 video 내용을 호출하고 결과값을 받기 전에
+`Null props` 상태일 때가 생기는데 그 동안에 `Null props` 처리를 해주지 않으면 에러가 발생한다.
+`Component`가 시작할 때 if()로 `Null props`를 처리해야 한다.
+```javascript
+const VideoDetail = ({video}) => {
+	//handling null props
+	if (!video) {
+		return <div>Loading...</div>;
+	}
+
+	const videoId = video.id.videoId;
+	const url = `https://www.youtube.com/embed/${videoId}`;
+
+	return (
+		//blah blah...
+	);
+}
+
+export default VideoDetail;
+```
+
+### Component / Container 차이
+둘 다 특정 기능을 실행한다는 공통점이 있지만
+`Container`는 `Redux`에 의해 `Data fetch`를 하는 `Component`이다.
+
+## Usin Redux with React
+```javascript
+import { combineReducers } from 'redux';
+import {BooksReducer from './reducer_books';
+
+const rootReducer = combineReducers({
+	books: BooksReducer
+});
+
+export default rootReducer;
+```
+`combineReducers` from redux 를 이용해서 `reducer`의 `state`에 내용(여기서는 books)을 연결할 수 있다.
+여기서 `rootReducer`에 등록된 `state`들은 global state 이다.
+이렇게 연결된 global state 를 아애롸 같이 사용할 수 있다.
+
+```javascript
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class BookList extends Component {
+    renderList() {
+        return this.props.books.map((book) => {
+            return (
+              <li
+                  key={book.title}
+                  className="list-group-item">{book.title}</li>
+            );
+        })
+    }
+
+    render() {
+        return (
+            <ul className="list-group col-sm-4">
+                {this.renderList()}
+            </ul>
+        )
+    }
+}
+
+// react-redux 의 { connect } 를 이용해서 이 함수 안에서 return 되는 값들은
+// props 의 값으로 사용할 수 있다.
+// ex) this.props.books
+function mapStateToProps(state) {
+    // Whatever is returned will show up as props
+    // inside of BookList
+    return {
+        books: state.books
+    }
+}
+
+export default connect(mapStateToProps)(BookList);
+```
+
+### Action Flow
+![Imgur](http://i.imgur.com/nUNHRxy.png)
